@@ -8,36 +8,34 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Registration form</title>
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/user/save" method="POST">
-    Name: <input name="name" />
+    Name: <input required placeholder="Ваше имя" name="name" />
     <br><br>
-    Second name: <input name="second_name" />
+    Second name: <input required placeholder="Отчество" name="second_name" />
     <br><br>
-    Surname: <input name="surname" />
+    Surname: <input required placeholder="Фамилия" name="surname" />
     <br><br>
-    Birthday: <input type="date" name="birthday" />
+    Birthday: <input required  type="date" name="birthday" />
     <br><br>
-    Address: <input name="address" />
+    Address: <input required placeholder="Адресс" name="address" />
     <br><br>
-    Phone number: <input name="phone_number" />
+    Phone number: <input required placeholder="+375-29-***-**-**" name="phone_number" />
     <br><br>
     Gender: <input type="radio" name="gender" value="female" checked />Female
     <input type="radio" name="gender" value="male" />Male
     <br><br>
-    Passport number: <input name="passport_number" />
+    Passport number: <input required placeholder="Паспорт" name="passport_number" />
     <br><br>
-    Email: <input type="email" name="email" />
+    Email: <input required type="email" name="email" />
     <br><br>
-    Password: <input type="password" name="password" />
+    Password: <input required type="password" name="password" />
     <br><br>
-    Login: <input name="login" />
+    Login: <input required name="login" />
     <br><br>
-
-
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Save" />
 </form>
 </body>
 </html>

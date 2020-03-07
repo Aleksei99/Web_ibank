@@ -25,19 +25,7 @@ public class UserDAOImpl implements UserDAO {
             try (ResultSet resultSet = statement.executeQuery(FIND_ALL)) {
                 while (resultSet.next()) {
                     User user = new User();
-                    user.setId(resultSet.getInt("id"));
-                    user.setName(resultSet.getString("name"));
-                    user.setSurname(resultSet.getString("surname"));
-                    user.setBirthday(resultSet.getDate("birthday"));
-                    user.setAddress(resultSet.getString("address"));
-                    user.setTelephone(resultSet.getString("phone_number"));
-                    user.setSex(resultSet.getString("sex"));
-                    user.setSecondName(resultSet.getString("second_name"));
-                    user.setPassportNumber(resultSet.getString("passport_number"));
-                    user.setUserRole(UserRole.valueOf(resultSet.getString("role")));
-                    user.setLogin(resultSet.getString("login"));
-                    user.setPassword(resultSet.getString("password"));
-                    user.setEmail(resultSet.getString("email"));
+                    UserInfo(resultSet, user, UserRole.valueOf(resultSet.getString("role")));
                     users.add(user);
                 }
             }
@@ -45,6 +33,22 @@ public class UserDAOImpl implements UserDAO {
             e.printStackTrace();
         }
         return users;
+    }
+
+    private void UserInfo(ResultSet resultSet, User user, UserRole userRole) throws SQLException {
+        user.setId(resultSet.getInt("id"));
+        user.setName(resultSet.getString("name"));
+        user.setSurname(resultSet.getString("surname"));
+        user.setBirthday(resultSet.getDate("birthday"));
+        user.setAddress(resultSet.getString("address"));
+        user.setTelephone(resultSet.getString("phone_number"));
+        user.setSex(resultSet.getString("sex"));
+        user.setSecondName(resultSet.getString("second_name"));
+        user.setPassportNumber(resultSet.getString("passport_number"));
+        user.setUserRole(userRole);
+        user.setLogin(resultSet.getString("login"));
+        user.setPassword(resultSet.getString("password"));
+        user.setEmail(resultSet.getString("email"));
     }
 
     @Override
@@ -56,19 +60,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.execute();
             try (ResultSet resultSet = preparedStatement.getResultSet()) {
                 while (resultSet.next()) {
-                    user.setId(resultSet.getInt("id"));
-                    user.setName(resultSet.getString("name"));
-                    user.setSurname(resultSet.getString("surname"));
-                    user.setBirthday(resultSet.getDate("birthday"));
-                    user.setAddress(resultSet.getString("address"));
-                    user.setTelephone(resultSet.getString("phone_number"));
-                    user.setSex(resultSet.getString("sex"));
-                    user.setSecondName(resultSet.getString("second_name"));
-                    user.setPassportNumber(resultSet.getString("passport_number"));
-                    user.setUserRole(UserRole.valueOf(resultSet.getString("role")));
-                    user.setLogin(resultSet.getString("login"));
-                    user.setPassword(resultSet.getString("password"));
-                    user.setEmail(resultSet.getString("email"));
+                    UserInfo(resultSet, user, UserRole.valueOf(resultSet.getString("role")));
                 }
             }
         } catch (SQLException e) {
