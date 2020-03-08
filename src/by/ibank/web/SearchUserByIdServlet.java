@@ -17,7 +17,7 @@ public class SearchUserByIdServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr = req.getParameter("id");
         int id = Integer.parseInt(idStr);
-        User user = userDAO.findUser(id);
+        User user = userDAO.find(id);
         req.setAttribute("user",user);
         req.getRequestDispatcher("/WEB-INF/jsp/user.jsp").forward(req, resp);
     }

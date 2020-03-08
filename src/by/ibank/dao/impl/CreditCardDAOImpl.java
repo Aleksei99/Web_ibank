@@ -22,7 +22,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     private static final String DELETE_CARD = "DELETE FROM  credit_cards WHERE (card_number = ?)";
 
     @Override
-    public List<CreditCard> findAllCards(String user) {
+    public List<CreditCard> findAll(String user) {
         List<CreditCard> cards = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_CARDS)) {
@@ -97,7 +97,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     }
 
     @Override
-    public void addCard(Account account, CreditCard creditCard) {
+    public void add(Account account, CreditCard creditCard) {
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_CARD)) {
             preparedStatement.setInt(1, creditCard.getCardNumber());
@@ -112,10 +112,10 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     }
 
     @Override
-    public void deleteCard(String cardNumber) {
+    public void delete(int cardNumber) {
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CARD)) {
-            preparedStatement.setString(1, cardNumber);
+            preparedStatement.setInt(1, cardNumber);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

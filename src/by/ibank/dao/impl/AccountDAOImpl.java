@@ -55,7 +55,7 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public List<Account> findAllAccounts() {
+    public List<Account> findAll() {
         List<Account> accounts = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection();
              Statement statement = connection.createStatement()) {
@@ -74,7 +74,7 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public Account findAccount(String account_number) {
+    public Account find(String account_number) {
         Account account = new Account();
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_ACCOUNT)) {

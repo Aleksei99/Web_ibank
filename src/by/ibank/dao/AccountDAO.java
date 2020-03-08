@@ -12,9 +12,9 @@ public interface AccountDAO {
 
     void addMoney(Account account, int money);
 
-    List<Account> findAllAccounts();
+    List<Account> findAll();
 
-    Account findAccount(String account_number);
+    Account find(String account_number);
 
     void transferMoney(Account fromAccount, int money, Account toAccount);
 }

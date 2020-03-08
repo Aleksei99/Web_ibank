@@ -6,11 +6,11 @@ import by.ibank.entity.CreditCard;
 import java.util.List;
 
 public interface CreditCardDAO {
-    List<CreditCard> findAllCards(String user);
+    List<CreditCard> findAll(String user);
 
     void transferMoney(int fromCreditCard, int money, int toCreditCard);
 
-    void addCard(Account account, CreditCard creditCard);
+    void add(Account account, CreditCard creditCard);
 
-    void deleteCard(String cardNumber);
+    void delete(int cardNumber);
 }

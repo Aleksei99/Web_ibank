@@ -5,13 +5,13 @@ import by.ibank.entity.User;
 import java.util.List;
 
 public interface UserDAO {
-    List<User> findAllUsers();
+    List<User> findAll();
 
-    User findUser(int id);
+    User find(int id);
 
     boolean save(User user);
 
-    void remove(int id);
+    void delete(int id);
 
     void update(User user);
 }

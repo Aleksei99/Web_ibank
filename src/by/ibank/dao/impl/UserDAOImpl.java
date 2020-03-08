@@ -18,7 +18,7 @@ public class UserDAOImpl implements UserDAO {
     private static final String DELETE_BY_ID = "delete from users where id = ?";
 
     @Override
-    public List<User> findAllUsers() {
+    public List<User> findAll() {
         List<User> users = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection();
              Statement statement = connection.createStatement()) {
@@ -52,7 +52,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User findUser(int id) {
+    public User find(int id) {
         User user = new User();
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID)) {
@@ -94,7 +94,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void remove(int id) {
+    public void delete(int id) {
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID)) {
             preparedStatement.setInt(1, id);
