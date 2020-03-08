@@ -76,6 +76,8 @@
             border-radius: 50%;
         }
 
+
+
         /* On mouse-over, add a grey background color */
         .container:hover input ~ .checkmark {
             background-color: #ccc;
@@ -110,6 +112,7 @@
     </style>
 </head>
 <body>
+<%@include file="header2.jsp"%>
 <h1 align="center"> Registration </h1>
 <form action="${pageContext.request.contextPath}/user/save" method="POST">
     <label>
