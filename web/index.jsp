@@ -58,7 +58,7 @@
   <form action="" method="post">
 
     <div class="container">
-      <input type="text" placeholder="Enter login" name="name" required>
+      <input type="text" placeholder="Enter login" name="login" required>
 
       <input type="password" placeholder="Enter Password" name="psw" required>
 

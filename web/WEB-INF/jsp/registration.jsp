@@ -28,6 +28,15 @@
         text-align: center;
         margin-top: 0;
     }
+    button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+     }
     .submit{
         background-color: #3fb6b2;
         padding: 12px 45px;
@@ -112,7 +121,14 @@
     </style>
 </head>
 <body>
-<%@include file="header2.jsp"%>
+
+<form action="http://localhost:8080/web_war_exploded/">
+    <button>Log in</button>
+</form>
+<form action="http://localhost:8080/web_war_exploded/user/save">
+    <button>Registration</button>
+</form>
+
 <h1 align="center"> Registration </h1>
 <form action="${pageContext.request.contextPath}/user/save" method="POST">
     <label>

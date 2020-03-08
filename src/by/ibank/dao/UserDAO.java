@@ -9,6 +9,8 @@ public interface UserDAO {
 
     User find(int id);
 
+    User findByLogin(String login);
+
     boolean save(User user);
 
     void delete(int id);

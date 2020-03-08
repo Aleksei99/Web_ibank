@@ -12,6 +12,7 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
     private static final String FIND_ALL = "select * from users";
     private static final String FIND_BY_ID = "select * from users where id = ?";
+    private static final String FIND_BY_LOGIN = "select * from users where login = ?";
     private static final String SAVE = "INSERT into users (name,second_name, surname, birthday, address," +
             " phone_number, sex,  passport_number," +
             " email, password, login,role) values (?,?,?,?,?,?,?,?,?,?,?,'USER')";
@@ -70,6 +71,25 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public User findByLogin(String login) {
+        User user = new User();
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_LOGIN)) {
+            preparedStatement.setString(1, login);
+            preparedStatement.execute();
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                while (resultSet.next()) {
+                    UserInfo(resultSet, user, UserRole.valueOf(resultSet.getString("role")));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
+    @Override
     public boolean save(User user) {
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SAVE)) {
@@ -84,7 +104,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(9, user.getEmail());
             preparedStatement.setString(10, user.getPassword());
             preparedStatement.setString(11, user.getLogin());
-           // preparedStatement.setString(12, user.getUserRole().toString());
+            // preparedStatement.setString(12, user.getUserRole().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
