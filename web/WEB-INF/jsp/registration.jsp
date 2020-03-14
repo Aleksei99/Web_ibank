@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Registration form</title>
+    <title>iBank</title>
     <style>
         h1{
         color: orange;
@@ -122,11 +122,8 @@
 </head>
 <body>
 
-<form action="http://localhost:8080/web_war_exploded/">
+<form action="http://localhost:8080/login">
     <button>Log in</button>
-</form>
-<form action="http://localhost:8080/web_war_exploded/user/save">
-    <button>Registration</button>
 </form>
 
 <h1 align="center"> Registration </h1>

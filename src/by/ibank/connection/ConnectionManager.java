@@ -1,4 +1,4 @@
-package by.ibank.dao;
+package by.ibank.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

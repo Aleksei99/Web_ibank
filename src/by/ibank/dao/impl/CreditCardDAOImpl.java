@@ -1,6 +1,6 @@
 package by.ibank.dao.impl;
 
-import by.ibank.dao.ConnectionManager;
+import by.ibank.connection.ConnectionManager;
 import by.ibank.dao.CreditCardDAO;
 import by.ibank.dao.HistoryDAO;
 import by.ibank.entity.Account;
@@ -20,6 +20,21 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     private static final String TRANSFER_MONEY = "update accounts a join credit_cards c on c.account_id=a.id set amount = ? where card_number = ?";
     private static final String ADD_CARD = "insert into credit_cards (card_number,exp_month,exp_year,account_id) values (?,?,?,?)";
     private static final String DELETE_CARD = "DELETE FROM  credit_cards WHERE (card_number = ?)";
+
+    private static CreditCardDAOImpl INSTANCE = null;
+
+    private CreditCardDAOImpl(){}
+
+    public static CreditCardDAOImpl getInstance(){
+        if(INSTANCE==null){
+            synchronized (CreditCardDAOImpl.class){
+                if(INSTANCE==null){
+                    INSTANCE = new CreditCardDAOImpl();
+                }
+            }
+        }
+        return INSTANCE;
+    }
 
     @Override
     public List<CreditCard> findAll(String user) {
@@ -86,7 +101,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
             connection.setAutoCommit(false);
             preparedStatement2.executeUpdate();
             preparedStatement3.executeUpdate();
-            HistoryDAO historyDAO = new HistoryDAOImpl();
+            HistoryDAO historyDAO = HistoryDAOImpl.getInstance();
             LocalDate date = LocalDate.now();
             historyDAO.addToHistory(fromCreditCard, date, money);
             connection.commit();

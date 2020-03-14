@@ -20,8 +20,6 @@
 <p>User sex: ${requestScope.user.sex}</p>
 <p>User passportNumber: ${requestScope.user.passportNumber}</p>
 <p>User email: ${requestScope.user.email}</p>
-<p>User password: ${requestScope.user.password}</p>
-<p>User login: ${requestScope.user.login}</p>
 
 </body>
 </html>

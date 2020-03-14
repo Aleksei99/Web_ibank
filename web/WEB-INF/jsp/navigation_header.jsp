@@ -38,15 +38,18 @@
         .dropdown-content a:hover {
             background-color: #ddd;
         }
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: green;
+        }
 
     </style>
 </head>
 <body>
 <div class="navbar">
     <a href="#home">Home</a>
-    <a href="#news">Payments and transfer</a>
-    <a href="#news">Bills</a>
-    <a href="#news">History</a>
+    <a href="#PT">Payments and transfer</a>
+    <a href="#bills">Bills</a>
+    <a href="#history">History</a>
 </div>
 </body>
 </html>

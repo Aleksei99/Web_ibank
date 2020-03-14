@@ -17,7 +17,7 @@ import java.text.SimpleDateFormat;
 @WebServlet(urlPatterns = "/user/save", name = "SaveUserServlet")
 public class SaveUserServlet extends HttpServlet {
 
-    private UserDAOImpl userDAO = new UserDAOImpl();
+    private UserDAOImpl userDAO =  UserDAOImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

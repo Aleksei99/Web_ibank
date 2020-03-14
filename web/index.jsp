@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title></title>
+    <title>iBank</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
       body {font-family: Arial, Helvetica, sans-serif;}
@@ -15,6 +15,12 @@
         display: inline-block;
         border: 1px solid #ccc;
         box-sizing: border-box;
+      }
+      p{
+        color: #4CAF50;
+      }
+      h1{
+        color: orange;
       }
 
       button {
@@ -32,15 +38,6 @@
       }
 
 
-      .container {
-        padding: 16px;
-      }
-
-      span.psw {
-        float: right;
-        padding-top: 16px;
-      }
-
       /* Change styles for span and cancel button on extra small screens */
       @media screen and (max-width: 300px) {
         span.psw {
@@ -52,19 +49,14 @@
     </style>
   </head>
   <body>
-  <%@include file="header.jsp"%>
-  <h2>Login Form</h2>
-
-  <form action="" method="post">
-
-    <div class="container">
-      <input type="text" placeholder="Enter login" name="login" required>
-
-      <input type="password" placeholder="Enter Password" name="psw" required>
-
-      <button type="submit">Login</button>
-    </div>
-
+<h1>Welcome</h1>
+  <form action="http://localhost:8080/login">
+    <button>Log in</button>
   </form>
+<p>Not registered yet?</p>
+  <form action="http://localhost:8080/user/save">
+    <button>Registration</button>
+  </form>
+
   </body>
 </html>

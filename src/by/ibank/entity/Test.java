@@ -23,11 +23,11 @@ public class Test {
         checkFunctional("ADMIN");
         checkFunctional("MODERATOR");
         System.out.println(UserRole.ADMIN);
-        UserDAO userDAO = new UserDAOImpl();
+        //UserDAO userDAO = new UserDAOImpl();
 //        User user2 = new User("Aloxa","Alexandrovich","kekw",1992,11,2,"home","+375298582223","mail","mc2845492","al@gamil.com","dsgff584","alox",UserRole.USER);
 //        userDAO.save(user2);
        // User user = userDAO.findUser(2);
-        AccountDAO accountDAO = new AccountDAOImpl();
+       // AccountDAO accountDAO = new AccountDAOImpl();
       //  Account ac1 =new Account("3wjr4h87ff",200);//3wjr4h2j23428
        // accountDAO.save(user,ac1);
 //        Account fromAccount = accountDAO.findAccount("3wjr4h2j23428");
@@ -36,8 +36,8 @@ public class Test {
 
         //CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
         //System.out.println(creditCardDAO.findAllUserCards("Alex"));
-        CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
-        creditCardDAO.transferMoney(554,50,552);
+        //CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
+       // creditCardDAO.transferMoney(554,50,552);
     }
 
 

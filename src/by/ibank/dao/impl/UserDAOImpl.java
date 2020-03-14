@@ -1,6 +1,6 @@
 package by.ibank.dao.impl;
 
-import by.ibank.dao.ConnectionManager;
+import by.ibank.connection.ConnectionManager;
 import by.ibank.dao.UserDAO;
 import by.ibank.entity.User;
 import by.ibank.entity.UserRole;
@@ -17,6 +17,21 @@ public class UserDAOImpl implements UserDAO {
             " phone_number, sex,  passport_number," +
             " email, password, login,role) values (?,?,?,?,?,?,?,?,?,?,?,'USER')";
     private static final String DELETE_BY_ID = "delete from users where id = ?";
+
+    private static UserDAOImpl INSTANCE = null;
+
+    private UserDAOImpl(){}
+
+    public static UserDAOImpl getInstance(){
+        if(INSTANCE==null){
+            synchronized (UserDAOImpl.class){
+                if(INSTANCE==null){
+                    INSTANCE = new UserDAOImpl();
+                }
+            }
+        }
+        return INSTANCE;
+    }
 
     @Override
     public List<User> findAll() {

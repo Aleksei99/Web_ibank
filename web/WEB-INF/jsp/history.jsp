@@ -1,17 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: User
-  Date: 08.03.2020
-  Time: 23:27
+  Date: 10.03.2020
+  Time: 17:39
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>iBank</title>
+    <title>Title</title>
 </head>
 <body>
-    <%@include file="navigation_header.jsp"%>
-    <p>Welcome : ${requestScope.user.name} ${requestScope.user.secondName} ${requestScope.user.surname}</p>
+
 </body>
 </html>

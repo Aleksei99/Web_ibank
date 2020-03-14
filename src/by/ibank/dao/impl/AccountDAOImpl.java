@@ -1,7 +1,7 @@
 package by.ibank.dao.impl;
 
 import by.ibank.dao.AccountDAO;
-import by.ibank.dao.ConnectionManager;
+import by.ibank.connection.ConnectionManager;
 import by.ibank.entity.Account;
 import by.ibank.entity.User;
 
@@ -17,6 +17,20 @@ public class AccountDAOImpl implements AccountDAO {
     private static final String FIND_ACCOUNT = "select * from accounts where account_number = ?";
     private static final String TRANSFER_MONEY = "update accounts set amount = ? where account_number = ?";
 
+    private static AccountDAOImpl INSTANCE = null;
+
+private AccountDAOImpl(){}
+
+public static AccountDAOImpl getInstance(){
+    if(INSTANCE==null){
+        synchronized (AccountDAOImpl.class){
+            if(INSTANCE==null){
+                INSTANCE = new AccountDAOImpl();
+            }
+        }
+    }
+    return INSTANCE;
+}
     @Override
     public void save(User user, Account account) {
         try (Connection connection = ConnectionManager.getConnection();

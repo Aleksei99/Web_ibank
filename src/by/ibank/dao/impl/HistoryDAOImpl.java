@@ -1,6 +1,6 @@
 package by.ibank.dao.impl;
 
-import by.ibank.dao.ConnectionManager;
+import by.ibank.connection.ConnectionManager;
 import by.ibank.dao.HistoryDAO;
 
 import java.sql.*;
@@ -8,6 +8,21 @@ import java.time.LocalDate;
 
 public class HistoryDAOImpl implements HistoryDAO {
     private static final String ADD_TO_HISTORY = "insert into history (card_number,date, amount) values (?,?,?)";
+
+    private static HistoryDAOImpl INSTANCE = null;
+
+    private HistoryDAOImpl(){}
+
+    public static HistoryDAOImpl getInstance(){
+        if(INSTANCE==null){
+            synchronized (HistoryDAOImpl.class){
+                if(INSTANCE==null){
+                    INSTANCE = new HistoryDAOImpl();
+                }
+            }
+        }
+        return INSTANCE;
+    }
 
     @Override
     public void addToHistory(int cardNumber, LocalDate date, int amount) {
