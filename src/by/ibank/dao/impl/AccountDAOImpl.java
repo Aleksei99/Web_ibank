@@ -14,6 +14,7 @@ public class AccountDAOImpl implements AccountDAO {
     private static final String DELETE_ACCOUNT = "DELETE FROM  accounts WHERE (account_number = ?)";
     private static final String ADD_MONEY = "UPDATE  accounts SET amount = ? WHERE account_number = ?";
     private static final String FIND_ALL_ACCOUNTS = "select * from accounts";
+    private static final String FIND_ALL_USER_ACCOUNTS = "select * from accounts where user_id = ?";
     private static final String FIND_ACCOUNT = "select * from accounts where account_number = ?";
     private static final String TRANSFER_MONEY = "update accounts set amount = ? where account_number = ?";
 
@@ -88,6 +89,27 @@ public static AccountDAOImpl getInstance(){
     }
 
     @Override
+    public List<Account> findAllUserAccounts(User user) {
+        List<Account> accounts = new ArrayList<>();
+        try (Connection connection = ConnectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_USER_ACCOUNTS)) {
+            preparedStatement.setInt(1,user.getId());
+            preparedStatement.execute();
+            try (ResultSet resultSet = preparedStatement.getResultSet()) {
+                while (resultSet.next()) {
+                    Account account = new Account();
+                    account.setAccountNumber(resultSet.getString("account_number"));
+                    account.setAmount(resultSet.getInt("amount"));
+                    accounts.add(account);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return accounts;
+    }
+
+    @Override
     public Account find(String account_number) {
         Account account = new Account();
         try (Connection connection = ConnectionManager.getConnection();
@@ -96,6 +118,7 @@ public static AccountDAOImpl getInstance(){
             preparedStatement.execute();
             try (ResultSet resultSet = preparedStatement.getResultSet()) {
                 while (resultSet.next()) {
+                    account.setId(resultSet.getInt("id"));
                     account.setAccountNumber(resultSet.getString("account_number"));
                     account.setAmount(resultSet.getInt("amount"));
                 }

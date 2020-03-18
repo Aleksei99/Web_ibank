@@ -3,6 +3,7 @@ package by.ibank.web;
 import by.ibank.dao.impl.UserDAOImpl;
 import by.ibank.entity.User;
 import by.ibank.entity.UserRole;
+import by.ibank.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,8 +17,6 @@ import java.text.SimpleDateFormat;
 
 @WebServlet(urlPatterns = "/user/save", name = "SaveUserServlet")
 public class SaveUserServlet extends HttpServlet {
-
-    private UserDAOImpl userDAO =  UserDAOImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,7 +44,7 @@ public class SaveUserServlet extends HttpServlet {
         String login = req.getParameter("login");
         //UserRole role = (UserRole) req.getAttribute("role");
         User user = new User(name,secondName,surname,birthday,address,phoneNumber,sex,passportNumber,email,password,login);
-        if (userDAO.save(user)) {
+        if (UserService.getInstance().saveUser(user)) {
             req.setAttribute("user", user);
             req.getRequestDispatcher("/WEB-INF/jsp/user.jsp").forward(req, resp);
         } else {

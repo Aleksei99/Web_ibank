@@ -14,6 +14,8 @@ public interface AccountDAO {
 
     List<Account> findAll();
 
+    List<Account> findAllUserAccounts(User user);
+
     Account find(String account_number);
 
     void transferMoney(Account fromAccount, int money, Account toAccount);

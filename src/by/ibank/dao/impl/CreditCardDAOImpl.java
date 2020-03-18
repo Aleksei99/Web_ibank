@@ -5,6 +5,7 @@ import by.ibank.dao.CreditCardDAO;
 import by.ibank.dao.HistoryDAO;
 import by.ibank.entity.Account;
 import by.ibank.entity.CreditCard;
+import by.ibank.entity.User;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -15,8 +16,8 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     private static final String FIND_ALL_CARDS = "with su_table as( select card_number,exp_month,exp_year,account_id,user_id" +
             " from credit_cards c join accounts a on c.account_id=a.id)\n" +
             "select  card_number,exp_month,exp_year,account_id,user_id,name" +
-            " from su_table  s join users u on s.user_id=u.id where name=?";
-    private static final String AMOUNT_FROM_ACCOUNTS = "select amount from accounts a join credit_cards c on c.account_id=a.id where card_number = ?";
+            " from su_table  s join users u on s.user_id=u.id where id=?";
+    private static final String AMOUNT_ON_CREDIT_CARD = "select amount from accounts a join credit_cards c on c.account_id=a.id where card_number = ?";
     private static final String TRANSFER_MONEY = "update accounts a join credit_cards c on c.account_id=a.id set amount = ? where card_number = ?";
     private static final String ADD_CARD = "insert into credit_cards (card_number,exp_month,exp_year,account_id) values (?,?,?,?)";
     private static final String DELETE_CARD = "DELETE FROM  credit_cards WHERE (card_number = ?)";
@@ -37,11 +38,11 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     }
 
     @Override
-    public List<CreditCard> findAll(String user) {
+    public List<CreditCard> findAll(User user) {
         List<CreditCard> cards = new ArrayList<>();
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_CARDS)) {
-            preparedStatement.setString(1, user);
+            preparedStatement.setInt(1, user.getId());
             preparedStatement.execute();
             try (ResultSet resultSet = preparedStatement.getResultSet()) {
                 while (resultSet.next()) {
@@ -68,8 +69,8 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     @Override
     public void transferMoney(int fromCreditCard, int money, int toCreditCard) {
         try (Connection connection = ConnectionManager.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(AMOUNT_FROM_ACCOUNTS);
-             PreparedStatement preparedStatement1 = connection.prepareStatement(AMOUNT_FROM_ACCOUNTS);
+             PreparedStatement preparedStatement = connection.prepareStatement(AMOUNT_ON_CREDIT_CARD);
+             PreparedStatement preparedStatement1 = connection.prepareStatement(AMOUNT_ON_CREDIT_CARD);
              PreparedStatement preparedStatement2 = connection.prepareStatement(TRANSFER_MONEY);
              PreparedStatement preparedStatement3 = connection.prepareStatement(TRANSFER_MONEY);
         ) {
@@ -116,7 +117,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(ADD_CARD)) {
             preparedStatement.setInt(1, creditCard.getCardNumber());
-            preparedStatement.setString(2, creditCard.getDateExpire().getMonth().toString());
+            preparedStatement.setString(2, ""+creditCard.getDateExpire().getMonth().getValue());
             preparedStatement.setString(3, "" + creditCard.getDateExpire().getYear());
             preparedStatement.setInt(4, account.getId());
 

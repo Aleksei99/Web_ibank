@@ -50,11 +50,11 @@
   </head>
   <body>
 <h1>Welcome</h1>
-  <form action="http://localhost:8080/login">
+  <form action="${pageContext.request.contextPath}/login">
     <button>Log in</button>
   </form>
 <p>Not registered yet?</p>
-  <form action="http://localhost:8080/user/save">
+  <form action="${pageContext.request.contextPath}/user/save">
     <button>Registration</button>
   </form>
 

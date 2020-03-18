@@ -43,4 +43,12 @@ public class UserService {
     public User getUserByLogin(String login){
         return UserDAOImpl.getInstance().findByLogin(login);
     }
+
+    public Boolean saveUser(User user){
+        return UserDAOImpl.getInstance().save(user);
+    }
+
+    public void deleteUser(int id){
+        UserDAOImpl.getInstance().delete(id);
+    }
 }

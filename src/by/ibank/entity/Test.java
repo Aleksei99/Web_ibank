@@ -4,6 +4,11 @@ import by.ibank.dao.*;
 import by.ibank.dao.impl.AccountDAOImpl;
 import by.ibank.dao.impl.CreditCardDAOImpl;
 import by.ibank.dao.impl.UserDAOImpl;
+import by.ibank.service.AccountService;
+import by.ibank.service.CreditCardService;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Test {
     public static void checkFunctional(String userRole) {
@@ -38,6 +43,10 @@ public class Test {
         //System.out.println(creditCardDAO.findAllUserCards("Alex"));
         //CreditCardDAO creditCardDAO = new CreditCardDAOImpl();
        // creditCardDAO.transferMoney(554,50,552);
+//        LocalDate date = LocalDate.parse("11"+"/15/"+"2023", DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+//        CreditCardDAOImpl creditCardDAO = CreditCardDAOImpl.getInstance();
+//        CreditCardService.getInstance().addCard(AccountService.getInstance().find("651654fg"),new CreditCard(2339,date));
+//        creditCardDAO.add(new Account(1,"651654fg",500),new CreditCard(123456,date));
     }
 
 

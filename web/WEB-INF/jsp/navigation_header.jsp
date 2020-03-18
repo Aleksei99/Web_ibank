@@ -46,9 +46,9 @@
 </head>
 <body>
 <div class="navbar">
-    <a href="#home">Home</a>
+    <a href="${pageContext.request.contextPath}/main_paige">Home</a>
     <a href="#PT">Payments and transfer</a>
-    <a href="#bills">Bills</a>
+    <a href="${pageContext.request.contextPath}/bills">Bills</a>
     <a href="#history">History</a>
 </div>
 </body>
