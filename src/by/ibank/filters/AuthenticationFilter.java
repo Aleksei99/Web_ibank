@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/main_paige","/bills"})
+@WebFilter(urlPatterns = {"/main_paige", "/bills"})
 public class AuthenticationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -24,9 +24,9 @@ public class AuthenticationFilter implements Filter {
         }
     }
 
-    private void sendBack(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException {
-        String previousUrl = ((HttpServletRequest) servletRequest).getHeader("Referer");
-        ((HttpServletResponse) servletResponse).sendRedirect(previousUrl);
+    public void sendBack(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException {
+        String previousUrl = ((HttpServletRequest) servletRequest).getHeader("referer");
+        ((HttpServletResponse) servletResponse).sendRedirect("/" + previousUrl);
     }
 
     private void allowAccess(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
