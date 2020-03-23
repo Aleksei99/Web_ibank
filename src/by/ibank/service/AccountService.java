@@ -4,6 +4,7 @@ import by.ibank.dao.impl.AccountDAOImpl;
 import by.ibank.entity.Account;
 import by.ibank.entity.User;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class AccountService {
@@ -21,7 +22,7 @@ public class AccountService {
         }
         return INSTANCE;
     }
-    public List<Account> allUserAccounts(User user){
+    public HashSet<Account> allUserAccounts(User user){
         return AccountDAOImpl.getInstance().findAllUserAccounts(user);
     }
     public void addBill(User user, Account account){

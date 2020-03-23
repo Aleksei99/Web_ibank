@@ -3,11 +3,14 @@ package by.ibank.dao.impl;
 import by.ibank.dao.AccountDAO;
 import by.ibank.connection.ConnectionManager;
 import by.ibank.entity.Account;
+import by.ibank.entity.CreditCard;
 import by.ibank.entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AccountDAOImpl implements AccountDAO {
     private static final String NEW_ACCOUNT = "insert into accounts (account_number,amount,user_id) values (?,?,?)";
@@ -89,8 +92,8 @@ public static AccountDAOImpl getInstance(){
     }
 
     @Override
-    public List<Account> findAllUserAccounts(User user) {
-        List<Account> accounts = new ArrayList<>();
+    public HashSet<Account> findAllUserAccounts(User user) {
+        HashSet<Account> accounts = new HashSet<>();
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_USER_ACCOUNTS)) {
             preparedStatement.setInt(1,user.getId());
@@ -100,6 +103,7 @@ public static AccountDAOImpl getInstance(){
                     Account account = new Account();
                     account.setAccountNumber(resultSet.getString("account_number"));
                     account.setAmount(resultSet.getInt("amount"));
+                    account.setId(resultSet.getInt("id"));
                     accounts.add(account);
                 }
             }

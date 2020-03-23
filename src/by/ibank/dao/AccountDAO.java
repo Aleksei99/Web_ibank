@@ -3,6 +3,7 @@ package by.ibank.dao;
 import by.ibank.entity.Account;
 import by.ibank.entity.User;
 
+import java.util.HashSet;
 import java.util.List;
 
 public interface AccountDAO {
@@ -14,7 +15,7 @@ public interface AccountDAO {
 
     List<Account> findAll();
 
-    List<Account> findAllUserAccounts(User user);
+    HashSet<Account> findAllUserAccounts(User user);
 
     Account find(String account_number);
 

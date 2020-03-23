@@ -20,15 +20,18 @@ public class AddCardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/jsp/add_card.jsp").forward(req,resp);
+        String accountNumber = req.getParameter("accountNumber");
+        req.getSession().setAttribute("accountNumber",accountNumber);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String accountNumber = req.getParameter("accountNumber");
+        String accountNumber = (String) req.getSession().getAttribute("accountNumber");
         int cardNumber  = Integer.parseInt(req.getParameter("cardNumber"));
         int month = Integer.parseInt(req.getParameter("month"));
         int year =Integer.parseInt( req.getParameter("year"));
         LocalDate date = LocalDate.of(year,month,1);
         CreditCardService.getInstance().addCard(AccountService.getInstance().find(accountNumber),new CreditCard(cardNumber,date));
+        resp.sendRedirect("/bills");
     }
 }

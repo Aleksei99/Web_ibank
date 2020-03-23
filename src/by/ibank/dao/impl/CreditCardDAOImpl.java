@@ -48,6 +48,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
                 while (resultSet.next()) {
                     CreditCard creditCard = new CreditCard();
                     creditCard.setCardNumber(resultSet.getInt("card_number"));
+                    creditCard.setAccountId(resultSet.getInt("account_id"));
 
                     String yearStr = resultSet.getString("exp_year");
                     String monthStr = resultSet.getString("exp_month");

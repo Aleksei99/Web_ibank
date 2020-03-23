@@ -1,10 +1,21 @@
 package by.ibank.entity;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Account extends AbstractEntity{
     private String accountNumber;
     private int amount;
+    private List<CreditCard> creditCards;
+
+
+    public List<CreditCard> getCreditCards() {
+        return creditCards;
+    }
+
+    public void setCreditCards(List<CreditCard> creditCards) {
+        this.creditCards = creditCards;
+    }
 
     public Account(String accountNumber, int amount) {
         this.accountNumber = accountNumber;

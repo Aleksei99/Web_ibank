@@ -10,17 +10,37 @@
 <html>
 <head>
     <title>Title</title>
+    <style>
+        .button {
+            font: bold 11px Arial;
+            text-decoration: none;
+            background-color: #EEEEEE;
+            color: #333333;
+            padding: 2px 6px 2px 6px;
+            border-top: 1px solid #CCCCCC;
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            border-left: 1px solid #CCCCCC;
+        }
+    </style>
 </head>
 <body>
     <%@include file="navigation_header.jsp"%>
     <c:forEach var="account" items="${requestScope.accounts}">
-        <p>Bill #${account.accountNumber}     amount $ ${account.amount}</p>
+        <p>ID = ${account.id} Bill #${account.accountNumber}     amount $ ${account.amount}</p>
+        <ul>
+        <c:forEach var="creditCard" items="${requestScope.creditCards}">
+            <c:if test="${creditCard.accountId==account.id}">
+                <li>AccountID= ${creditCard.accountId} Card Number = ${creditCard.cardNumber} Date expire = ${creditCard.dateExpire}</>
+                <br>
+            </c:if>
+        </c:forEach>
+        </ul>
+        <p><a href="${pageContext.request.contextPath}/bills/add-card?accountNumber=${account.accountNumber}" class="button">Add Card</a></p>
     </c:forEach>
     <form action="${pageContext.request.contextPath}/bills/add">
         <button>Add Bill</button>
     </form>
-    <form action="${pageContext.request.contextPath}/bills/add-card">
-        <button>Add Card</button>
-    </form>
+
 </body>
 </html>
