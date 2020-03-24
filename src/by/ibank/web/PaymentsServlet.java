@@ -20,6 +20,12 @@ public class PaymentsServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("currentUser");
         LinkedList<CreditCard> creditCards = CreditCardService.getInstance().findAllUserCards(user);
         req.getSession().setAttribute("cards", creditCards);
+        req.getRequestDispatcher("/WEB-INF/jsp/payments.jsp").forward(req,resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       // String cardFrom = req.getParameter("cards");---??????
         try {
             String card = req.getParameter("cards");
             Integer cardNumber = Integer.parseInt(card);
@@ -27,13 +33,9 @@ public class PaymentsServlet extends HttpServlet {
         }catch (Exception e){
             e.printStackTrace();
         }
-        req.getRequestDispatcher("/WEB-INF/jsp/payments.jsp").forward(req,resp);
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       // String cardFrom = req.getParameter("cards");---??????
         int cardNumberFrom = (int) req.getSession().getAttribute("selectedCard");
+
         String cardTo = req.getParameter("cardNumber");
         String amount = req.getParameter("amount");
         //int cardNumberFrom = Integer.parseInt(cardFrom);

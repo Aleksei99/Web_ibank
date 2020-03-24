@@ -13,16 +13,25 @@
 </head>
 <body>
 <%@include file="navigation_header.jsp" %>
-<form action="${pageContext.request.contextPath}/payments" method="get">
-    <select name="cards" onchange="this.form.submit()">
-        <option disabled>Choose card</option>
-        <c:forEach var="item" items="${sessionScope.cards}">
-            <option value="${item.cardNumber}" ${item.cardNumber==sessionScope.selectedCard.intValue() ? 'selected="selected"' : ''}>#${item.cardNumber}</option>
-        </c:forEach>
-    </select>
-</form>
+<%--<form action="${pageContext.request.contextPath}/payments" method="get">--%>
+<%--    --%>
+<%--</form>--%>
 
 <form action="${pageContext.request.contextPath}/payments" method="post">
+
+    <select name="cards" >
+        <option disabled>Choose card</option>
+        <c:choose>
+            <c:when test="${sessionScope.cards!=null}">
+                <c:forEach var="item" items="${sessionScope.cards}">
+                    <option value="${item.cardNumber}" ${item.cardNumber==sessionScope.selectedCard.intValue() ? 'selected="selected"' : ''}>
+                        #${item.cardNumber}</option>
+                </c:forEach>
+            </c:when>
+            <c:otherwise>You have no cards yet</c:otherwise>
+        </c:choose>
+    </select>
+
     <input type="number" required placeholder="Input card number" name="cardNumber">
     <br>
     <input type="number" required placeholder="Input amount" name="amount">
