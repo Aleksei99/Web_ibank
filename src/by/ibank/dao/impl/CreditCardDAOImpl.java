@@ -10,6 +10,7 @@ import by.ibank.entity.User;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CreditCardDAOImpl implements CreditCardDAO {
@@ -38,8 +39,8 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     }
 
     @Override
-    public List<CreditCard> findAll(User user) {
-        List<CreditCard> cards = new ArrayList<>();
+    public LinkedList<CreditCard> findAll(User user) {
+        LinkedList<CreditCard> cards = new LinkedList<>();
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_CARDS)) {
             preparedStatement.setInt(1, user.getId());

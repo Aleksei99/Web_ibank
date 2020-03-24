@@ -88,7 +88,7 @@
 <h3><fmt:message key="user.language"/></h3>
 <form action="${pageContext.request.contextPath}/login" method="get">
 
-    <select name="language" onchange="this.form.submit() ">
+        <select name="language" onchange="this.form.submit() ">
         <c:forEach var="item" items="${locales}">
             <option value="${item.key}" ${item.key == param.language ? 'selected="selected"' : ''}>${item.value}</option>
         </c:forEach>

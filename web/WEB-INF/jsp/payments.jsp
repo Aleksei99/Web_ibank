@@ -6,11 +6,28 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
+<%@include file="navigation_header.jsp" %>
+<form action="${pageContext.request.contextPath}/payments" method="get">
+    <select name="cards" onchange="this.form.submit()">
+        <option disabled>Choose card</option>
+        <c:forEach var="item" items="${sessionScope.cards}">
+            <option value="${item.cardNumber}" ${item.cardNumber==sessionScope.selectedCard.intValue() ? 'selected="selected"' : ''}>#${item.cardNumber}</option>
+        </c:forEach>
+    </select>
+</form>
 
+<form action="${pageContext.request.contextPath}/payments" method="post">
+    <input type="number" required placeholder="Input card number" name="cardNumber">
+    <br>
+    <input type="number" required placeholder="Input amount" name="amount">
+    <br>
+    <input type="submit" value="Pay">
+</form>
 </body>
 </html>

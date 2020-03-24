@@ -33,6 +33,7 @@
             <c:if test="${creditCard.accountId==account.id}">
                 <li>AccountID= ${creditCard.accountId} Card Number = ${creditCard.cardNumber} Date expire = ${creditCard.dateExpire}</>
                 <br>
+                <p><a href="${pageContext.request.contextPath}/payments?cards=${creditCard.cardNumber}" class="button">P&T</a></p>
             </c:if>
         </c:forEach>
         </ul>
