@@ -16,27 +16,31 @@
 <%--<form action="${pageContext.request.contextPath}/payments" method="get">--%>
 <%--    --%>
 <%--</form>--%>
+<c:choose>
+    <c:when test="${not empty cards}">
+        <form action="${pageContext.request.contextPath}/payments" method="post">
 
-<form action="${pageContext.request.contextPath}/payments" method="post">
+            <label>
+                <select name="cards">
+                    <option disabled>Choose card</option>
 
-    <select name="cards" >
-        <option disabled>Choose card</option>
-        <c:choose>
-            <c:when test="${sessionScope.cards!=null}">
-                <c:forEach var="item" items="${sessionScope.cards}">
-                    <option value="${item.cardNumber}" ${item.cardNumber==sessionScope.selectedCard.intValue() ? 'selected="selected"' : ''}>
-                        #${item.cardNumber}</option>
-                </c:forEach>
-            </c:when>
-            <c:otherwise>You have no cards yet</c:otherwise>
-        </c:choose>
-    </select>
+                    <c:forEach var="item" items="${sessionScope.cards}">
+                        <option value="${item.cardNumber}" ${item.cardNumber==sessionScope.selectedCard.intValue() ? 'selected="selected"' : ''}>
+                            #${item.cardNumber}</option>
+                    </c:forEach>
 
-    <input type="number" required placeholder="Input card number" name="cardNumber">
-    <br>
-    <input type="number" required placeholder="Input amount" name="amount">
-    <br>
-    <input type="submit" value="Pay">
-</form>
+                </select>
+            </label>
+
+            <br>
+            <input type="number" required placeholder="Input card number" name="cardNumber">
+            <br>
+            <input type="number" required placeholder="Input amount" name="amount">
+            <br>
+            <input type="submit" value="Pay">
+        </form>
+    </c:when>
+    <c:otherwise>You have no cards yet</c:otherwise>
+</c:choose>
 </body>
 </html>

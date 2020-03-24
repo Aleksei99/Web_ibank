@@ -20,6 +20,13 @@ public class PaymentsServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("currentUser");
         LinkedList<CreditCard> creditCards = CreditCardService.getInstance().findAllUserCards(user);
         req.getSession().setAttribute("cards", creditCards);
+        try {
+            String card = req.getParameter("cards");
+            Integer cardNumber = Integer.parseInt(card);
+            req.getSession().setAttribute("selectedCard", cardNumber);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         req.getRequestDispatcher("/WEB-INF/jsp/payments.jsp").forward(req,resp);
     }
 
