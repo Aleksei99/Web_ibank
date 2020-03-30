@@ -1,32 +1,49 @@
 package by.ibank.entity;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class History extends AbstractEntity {
     private int spentMoney;
-    private LocalDate datePurchase;
-    private CreditCard creditCard;
+    private Timestamp datePurchase;
+    private CreditCard creditCardFrom;
+    private CreditCard creditCardTo;
 
-    public History(int spentMoney, LocalDate datePurchase) {
+    public History(int spentMoney, Timestamp datePurchase) {
         this.spentMoney = spentMoney;
         this.datePurchase = datePurchase;
     }
 
-    public History(int id, int spentMoney, LocalDate datePurchase) {
+    public History(int id, int spentMoney, Timestamp datePurchase) {
         super(id);
         this.spentMoney = spentMoney;
         this.datePurchase = datePurchase;
     }
 
+    public History(int spentMoney, Timestamp datePurchase, CreditCard creditCardFrom, CreditCard creditCardTo) {
+        this.spentMoney = spentMoney;
+        this.datePurchase = datePurchase;
+        this.creditCardFrom = creditCardFrom;
+        this.creditCardTo = creditCardTo;
+    }
+
     public History() {
     }
 
-    public CreditCard getCreditCard() {
-        return creditCard;
+    public CreditCard getCreditCardTo() {
+        return creditCardTo;
     }
 
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
+    public void setCreditCardTo(CreditCard creditCardTo) {
+        this.creditCardTo = creditCardTo;
+    }
+
+    public CreditCard getCreditCardFrom() {
+        return creditCardFrom;
+    }
+
+    public void setCreditCardFrom(CreditCard creditCardFrom) {
+        this.creditCardFrom = creditCardFrom;
     }
 
     public int getSpentMoney() {
@@ -37,11 +54,11 @@ public class History extends AbstractEntity {
         this.spentMoney = spentMoney;
     }
 
-    public LocalDate getDatePurchase() {
+    public Timestamp getDatePurchase() {
         return datePurchase;
     }
 
-    public void setDatePurchase(LocalDate datePurchase) {
+    public void setDatePurchase(Timestamp datePurchase) {
         this.datePurchase = datePurchase;
     }
 

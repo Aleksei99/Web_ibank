@@ -27,6 +27,10 @@ public class CreditCard extends AbstractEntity{
         this.dateExpire = dateExpire;
     }
 
+    public CreditCard(int cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
     public CreditCard() {
     }
 

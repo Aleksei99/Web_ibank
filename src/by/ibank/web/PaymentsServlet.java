@@ -42,13 +42,14 @@ public class PaymentsServlet extends HttpServlet {
         }
 
         int cardNumberFrom = (int) req.getSession().getAttribute("selectedCard");
+        User user = (User) req.getSession().getAttribute("currentUser");
 
         String cardTo = req.getParameter("cardNumber");
         String amount = req.getParameter("amount");
         //int cardNumberFrom = Integer.parseInt(cardFrom);
         int cardNumberTo = Integer.parseInt(cardTo);
         int amountTransfer = Integer.parseInt(amount);
-        CreditCardService.getInstance().transferMoney(cardNumberFrom,amountTransfer,cardNumberTo);
+        CreditCardService.getInstance().transferMoney(user,cardNumberFrom,amountTransfer,cardNumberTo);
         resp.sendRedirect("bills");
     }
 }

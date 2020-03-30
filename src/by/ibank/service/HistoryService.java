@@ -1,5 +1,11 @@
 package by.ibank.service;
 
+import by.ibank.dao.impl.HistoryDAOImpl;
+import by.ibank.entity.History;
+import by.ibank.entity.User;
+
+import java.util.List;
+
 public class HistoryService {
     private static HistoryService INSTANCE = null;
 
@@ -14,5 +20,8 @@ public class HistoryService {
             }
         }
         return INSTANCE;
+    }
+    public List<History> getHistory(User user){
+        return HistoryDAOImpl.getInstance().showHistory(user);
     }
 }

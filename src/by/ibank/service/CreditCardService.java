@@ -26,8 +26,8 @@ public class CreditCardService {
     public void addCard(Account account, CreditCard creditCard){
         CreditCardDAOImpl.getInstance().add(account,creditCard);
     }
-    public void transferMoney(int fromCreditCard, int money, int toCreditCard){
-        CreditCardDAOImpl.getInstance().transferMoney(fromCreditCard,money,toCreditCard);
+    public void transferMoney(User user,int fromCreditCard, int money, int toCreditCard){
+        CreditCardDAOImpl.getInstance().transferMoney(user,fromCreditCard,money,toCreditCard);
     }
     public LinkedList<CreditCard> findAllUserCards(User user){
        return CreditCardDAOImpl.getInstance().findAll(user);

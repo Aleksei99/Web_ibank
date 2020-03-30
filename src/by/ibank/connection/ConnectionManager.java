@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionManager {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/my_bank2?serverTimezone=UTC";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost/my_bank2?useTimezone=true&serverTimezone=GMT%2B3";
 
     private static final String USER = "root";
     private static final String PASSWORD = "MySQLicui4cuL";

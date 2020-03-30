@@ -122,7 +122,7 @@
 </head>
 <body>
 
-<form action="http://localhost:8080/login">
+<form action="${pageContext.request.contextPath}/login">
     <button>Log in</button>
 </form>
 

@@ -69,7 +69,7 @@ public class CreditCardDAOImpl implements CreditCardDAO {
     }
 
     @Override
-    public void transferMoney(int fromCreditCard, int money, int toCreditCard) {
+    public void transferMoney(User user,int fromCreditCard, int money, int toCreditCard) {
         try (Connection connection = ConnectionManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(AMOUNT_ON_CREDIT_CARD);
              PreparedStatement preparedStatement1 = connection.prepareStatement(AMOUNT_ON_CREDIT_CARD);
@@ -105,8 +105,8 @@ public class CreditCardDAOImpl implements CreditCardDAO {
             preparedStatement2.executeUpdate();
             preparedStatement3.executeUpdate();
             HistoryDAO historyDAO = HistoryDAOImpl.getInstance();
-            LocalDate date = LocalDate.now();
-            historyDAO.addToHistory(fromCreditCard, date, money);
+
+            historyDAO.addToHistory(user,fromCreditCard, money, toCreditCard);
             connection.commit();
             connection.setAutoCommit(true);
         } catch (SQLException e) {
